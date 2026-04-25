@@ -1,17 +1,18 @@
-import { useI18n } from '@hooks'
+import { useI18n } from '@hooks';
+import { Button, Title } from '@styles';
 
 const MainMenu = () => {
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   return (
     <div className="main-menu">
-      <h1>Score Jump Jam Jamzo</h1>
+      <Title>Score Jump Jam Jamzo</Title>
       <div>
-        <h2>{t('menu.play')}</h2>
-        <h2>{t('menu.exit')}</h2>
+        <Button>{t('menu.play')}</Button>
+        <Button>{t('menu.exit')}</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainMenu
+export default MainMenu;

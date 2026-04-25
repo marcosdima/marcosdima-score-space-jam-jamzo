@@ -1,4 +1,4 @@
-import { Potential, Stat } from "../enums";
+import { Potential, Stat } from "./enums";
 import { Stats } from "./modules";
 import Soul from "./soul";
 

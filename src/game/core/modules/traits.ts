@@ -1,4 +1,4 @@
-import { Trait } from '../../enums';
+import { Trait } from '../enums';
 
 export default class Traits {
   values: Record<Trait, boolean>;

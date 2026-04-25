@@ -1,4 +1,4 @@
-import { Potential as PotentialKey, Rarity } from "../../enums";
+import { Potential as PotentialKey, Rarity } from "../enums";
 
 export default class Potential {
   values: Record<PotentialKey, Rarity>;

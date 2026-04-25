@@ -1,4 +1,4 @@
-import { Stat } from '../../enums';
+import { Stat } from '../enums';
 
 const MIN = 0;
 const MAX = 99;

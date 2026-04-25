@@ -26,6 +26,7 @@ export default defineConfig([
       quotes: ['error', 'single'],
       indent: ['error', 2],
       'comma-dangle': ['error', 'always-multiline'],
+      'eol-last': ['error', 'always'],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'no-console': 'off',

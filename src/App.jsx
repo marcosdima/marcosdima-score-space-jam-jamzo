@@ -5,7 +5,6 @@ import Game from './components/game/Game';
 
 const App = () => {
   const { theme } = useTheme();
-  console.log('Current theme:', theme);
   return (
     <ThemeProvider theme={theme}>
       <Base>

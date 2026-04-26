@@ -5,10 +5,12 @@ import Soul from "./soul";
 class Host {
   soul: Soul;
   stats: Stats;
+  private health: number = 100;
 
   constructor(soul: Soul) {
     this.soul = soul;
     this.stats = soul.stats.copy();
+    this.health = 100;
   }
 
   applyGrowth(
@@ -37,6 +39,14 @@ class Host {
 
     const growth = amount * external_modifier * potential_modifier;
     this.stats.modifyStat(target, Math.round(growth));
+  }
+
+  receiveDamage(amount: number) {
+    this.health = Math.max(0, this.health - amount);
+  }
+
+  isDead() {
+    return this.health <= 0;
   }
 }
 

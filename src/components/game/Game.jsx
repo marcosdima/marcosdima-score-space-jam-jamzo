@@ -1,32 +1,36 @@
 import { useRef, useState } from 'react';
-import GameController from './controller';
-import { Aren } from './instances/souls';
-import arcania from './instances/worlds/arcania';
+import { Ending } from '../../game/core/enums';
+import Host from '../../game/core/host';
+import { Aren } from '../../game/instances/souls';
+import arcania from '../../game/instances/worlds/arcania';
 
 const Game = () => {
-  const [controller, setController] = useState(null);
-  const [snapshot, setSnapshot] = useState(null);
+  const [world, setWorld] = useState(null);
+  const [host, setHost] = useState(null);
   const [running, setRunning] = useState(false);
 
   const loopRef = useRef(null);
 
   const init = () => {
-    const c = new GameController(arcania, Aren);
+    const w = arcania;
+    const h = new Host(Aren);
 
-    setController(c);
-    setSnapshot(c.getState());
+    setWorld(w);
+    setHost(h);
     setRunning(false);
   };
 
   const tick = () => {
-    if (!controller) return;
+    if (!world || !host) return;
 
-    controller.tick();
-    setSnapshot(controller.getState());
+    world.tick(host);
 
-    if (controller.isFinished()) {
+    if (world.ending != Ending.OnGoing) {
       stop();
     }
+
+    setWorld({ ...world });
+    setHost({ ...host });
   };
 
   const start = () => {
@@ -41,16 +45,13 @@ const Game = () => {
     if (loopRef.current) clearInterval(loopRef.current);
   };
 
-  const world = snapshot?.world;
-  const host = snapshot?.host;
-
   return (
     <div style={{ padding: 16 }}>
       <h2>Arcania Simulation</h2>
 
       <div style={{ marginBottom: 10 }}>
         <button onClick={init}>Init</button>
-        <button onClick={start} disabled={!controller || running}>
+        <button onClick={start} disabled={!world || running}>
           Start
         </button>
         <button onClick={stop}>Stop</button>
@@ -59,7 +60,7 @@ const Game = () => {
       {world && host && (
         <>
           <div>Time: {world.time}</div>
-          <div>State: {world.worldState}</div>
+          <div>State: {world.state}</div>
           <div>Resources: {world.resources}</div>
 
           <h3>Soul</h3>
@@ -70,7 +71,7 @@ const Game = () => {
 
           <h3>Current Milestone</h3>
           <div>
-            {world.getCurrentMilestone()?.name ?? 'Completed'}
+            {world.currentMilestone?.name ?? 'Completed'}
           </div>
           <h3>Ending</h3>
           <div>{world.ending}</div>

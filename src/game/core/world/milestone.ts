@@ -6,6 +6,8 @@ export class Milestone {
   deadline: number;
   private completeRule: (host: Host, world: World) => boolean;
   private failRule: (host: Host, world: World) => boolean;
+  private completeEffect?: (host: Host, world: World) => void;
+  private failEffect?: (host: Host, world: World) => void;
   private spareTime: number;
 
   constructor(
@@ -13,11 +15,15 @@ export class Milestone {
     deadline: number,
     completeRule: (host: Host, world: World) => boolean = () => false,
     failRule: (host: Host, world: World) => boolean = () => false,
+    completeEffect?: (host: Host, world: World) => void,
+    failEffect?: (host: Host, world: World) => void
   ) {
     this.name = name;
     this.deadline = deadline;
     this.completeRule = completeRule;
     this.failRule = failRule;
+    this.completeEffect = completeEffect;
+    this.failEffect = failEffect;
     this.spareTime = 0;
   }
 
@@ -25,13 +31,20 @@ export class Milestone {
     const completed = this.completeRule(host, world);
     if (completed) {
       this.spareTime = this.deadline - world.time;
+      if (this.completeEffect) {
+        this.completeEffect(host, world);
+      }
     }
     return completed;
   }
 
 
   isFailed(host: Host, world: World): boolean {
-    return this.failRule(host, world) || world.time > this.deadline;
+    const ended = this.failRule(host, world) ||world.time > this.deadline;
+    if (ended && this.failEffect) {
+      this.failEffect(host, world);
+    }
+    return ended;
   }
 
   getSpareTime(): number {

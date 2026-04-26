@@ -29,21 +29,24 @@ export class Milestone {
 
   isCompleted(host: Host, world: World): boolean {
     const completed = this.completeRule(host, world);
+
     if (completed) {
       this.spareTime = this.deadline - world.time;
       if (this.completeEffect) {
         this.completeEffect(host, world);
       }
     }
+
     return completed;
   }
 
-
   isFailed(host: Host, world: World): boolean {
-    const ended = this.failRule(host, world) ||world.time > this.deadline;
+    const ended = this.failRule(host, world) || world.time >= this.deadline;
+
     if (ended && this.failEffect) {
       this.failEffect(host, world);
     }
+
     return ended;
   }
 

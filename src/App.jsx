@@ -1,7 +1,7 @@
 import { useTheme } from '@hooks';
 import { Base } from '@styles';
 import { ThemeProvider } from 'styled-components';
-import Game from './game/game';
+import Game from './components/game/Game';
 
 const App = () => {
   const { theme } = useTheme();

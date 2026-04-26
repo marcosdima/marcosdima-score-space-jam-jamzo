@@ -21,7 +21,5 @@ export class Event {
     return this.works_with.includes(this.world.worldState);
   }
 
-  trigger(host: Host) {
-    console.log('Event triggered: ', this.name, ' to host: ', host.soul.name);
-  }
+  trigger(host: Host) {}
 }

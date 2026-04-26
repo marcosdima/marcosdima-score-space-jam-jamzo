@@ -15,6 +15,7 @@ export default class World {
   ending: Ending;
 
   time: number = 0;
+  endsAt: number;
 
   eventPool: Event[];
 
@@ -34,6 +35,7 @@ export default class World {
     this.resources = initialResources;
     this.ending = Ending.OnGoing;
     this.currentMilestone = milestones[0];
+    this.endsAt = milestones[milestones.length - 1].deadline;
   }
 
   tick(host: Host) {
@@ -91,9 +93,9 @@ export default class World {
   }
 
   updateState() {
-    if (this.resources < 30 || this.time > 10) {
+    if (this.resources < 30 || this.time > (this.endsAt / 2)) {
       this.worldState = State.Tension;
-    } else if (this.resources < 10 || this.time > 20) {
+    } else if (this.resources < 10 || this.time > (this.endsAt / 0.75)) {
       this.worldState = State.Conflict;
     }
   }

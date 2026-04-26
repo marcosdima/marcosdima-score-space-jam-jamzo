@@ -42,6 +42,10 @@ export default class Stats {
     );
   }
 
+  getStat(stat: Stat): number {
+    return this.values[stat];
+  }
+
   static isPhysical(stat: Stat): boolean {
     return [Stat.Strength, Stat.Agility, Stat.Endurance].includes(stat);
   }

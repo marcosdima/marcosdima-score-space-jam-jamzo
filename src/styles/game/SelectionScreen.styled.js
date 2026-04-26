@@ -1,13 +1,44 @@
 import styled from 'styled-components';
+import Panel from '../containers/Panel.styled.js';
 
 const SelectionScreenLayout = styled.div`
   width: 100%;
   max-width: 960px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 `;
 
 const SelectionTitle = styled.h2`
   color: ${({ theme }) => theme.colors.text};
   margin: 0 0 12px 0;
+  flex-shrink: 0;
+`;
+
+const SelectionSplitRow = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 12px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const SelectionPanel = styled(Panel)`
+  height: 100%;
+  margin-bottom: 0;
+  min-height: 0;
+`;
+
+const ActionPanel = styled(Panel)`
+  flex-shrink: 0;
+  margin-bottom: 0;
 `;
 
 const SectionTitle = styled.h3`
@@ -36,7 +67,8 @@ const OptionCard = styled.div`
 
 const SelectionList = styled.div`
   width: 100%;
-  max-height: 360px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 4px;
@@ -48,11 +80,14 @@ const EmptyState = styled.p`
 `;
 
 export {
+  ActionPanel,
   EmptyState,
   OptionCard,
   SectionTitle,
   SelectionList,
+  SelectionPanel,
   SelectionScreenLayout,
+  SelectionSplitRow,
   SelectionTitle,
 };
 

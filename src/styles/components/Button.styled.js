@@ -7,6 +7,7 @@ const Button = styled.button`
   padding: 10px 20px;
   font-size: ${props => props.theme.typography.size.medium};
   border-radius: 5px;
+  font-family: ${props => props.theme.typography.font};
   
   &:hover {
     opacity: 0.8;

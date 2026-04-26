@@ -18,7 +18,7 @@ export class Event {
   }
 
   canTrigger(): boolean {
-    return this.works_with.includes(this.world.state);
+    return this.works_with.includes(this.world.worldState);
   }
 
   trigger(host: Host) {

@@ -1,3 +1,4 @@
+export { default as Ending } from './ending';
 export { default as Potential } from './potential';
 export { default as Rarity } from './rarity';
 export { default as Stat } from './stat';

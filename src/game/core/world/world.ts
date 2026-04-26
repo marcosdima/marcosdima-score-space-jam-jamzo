@@ -1,4 +1,4 @@
-import { State } from "../enums";
+import { Ending, State } from "../enums";
 import Host from "../host";
 import { Event } from "./event";
 import { Milestone } from "./milestone";
@@ -8,9 +8,11 @@ export default class World {
 
   milestones: Milestone[];
   currentMilestoneIndex: number = 0;
+  milestoneRecord: { [milestoneName: string]: "complete" | "fail" } = {};
 
-  state: State; // "peace" | "tension" | "war"
-  resources: number; // 0–100
+  worldState: State;
+  resources: number;
+  ending: Ending;
 
   time: number = 0;
 
@@ -26,8 +28,9 @@ export default class World {
     this.mission = mission;
     this.milestones = milestones;
     this.eventPool = eventPool;
-    this.state = initialState;
+    this.worldState = initialState;
     this.resources = initialResources;
+    this.ending = Ending.OnGoing;
   }
 
   tick(host: Host) {
@@ -59,10 +62,12 @@ export default class World {
 
     if (milestone.isCompleted(host, this)) {
       this.currentMilestoneIndex++;
+      this.milestoneRecord[milestone.name] = "complete";
       return "complete";
     }
 
     if (milestone.isFailed(host, this) || this.time > milestone.deadline) {
+      this.milestoneRecord[milestone.name] = "fail";
       return "fail";
     }
 
@@ -71,11 +76,15 @@ export default class World {
 
   updateState() {
     if (this.resources < 30 || this.time > 10) {
-      this.state = State.Tension;
+      this.worldState = State.Tension;
     }
 
     if (this.resources < 10 || this.time > 20) {
-      this.state = State.Conflict;
+      this.worldState = State.Conflict;
     }
+  }
+
+  consumeResources(amount: number) {
+    this.resources = Math.max(0, this.resources - amount);
   }
 }

@@ -16,19 +16,30 @@ const SectionTitle = styled.h3`
 `;
 
 const OptionCard = styled.div`
+  width: 100%;
+  box-sizing: border-box;
   cursor: pointer;
-  border: 1px solid ${({ $active, theme }) => ($active ? theme.colors.primary : theme.colors.secondary)};
+  border: 1px solid
+    ${({ $active, theme }) =>
+    $active ? theme.colors.primary : theme.colors.secondary};
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 8px;
-  background: ${({ $active, theme }) => ($active ? theme.colors.primary : 'transparent')};
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.primary : 'transparent'};
   color: ${({ $active, theme }) => ($active ? theme.colors.bg : 'inherit')};
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 `;
 
-const SoulsList = styled.div`
-  display: flex;
-  flex-direction: column;
+const SelectionList = styled.div`
+  width: 100%;
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
 `;
 
 const EmptyState = styled.p`
@@ -40,8 +51,8 @@ export {
   EmptyState,
   OptionCard,
   SectionTitle,
+  SelectionList,
   SelectionScreenLayout,
   SelectionTitle,
-  SoulsList
 };
 

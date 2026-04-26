@@ -1,3 +1,4 @@
+import { useI18n } from '@hooks';
 import { useState } from 'react';
 import {
   Button,
@@ -5,26 +6,31 @@ import {
   OptionCard,
   Panel,
   SectionTitle,
+  SelectionList,
   SelectionScreenLayout,
   SelectionTitle,
-  SoulsList,
 } from '../../styles';
 import { SoulCard } from './sub-components';
 
 const SelectionScreen = ({ worlds, souls, onSelect }) => {
   const [selectedWorldName, setSelectedWorldName] = useState('');
   const [selectedSoulName, setSelectedSoulName] = useState('');
+  const { worldText } = useI18n();
 
   const handleSelect = (soul) => {
-    setSelectedSoulName(soul.name);
+    setSelectedSoulName(
+      selectedSoulName === soul.name ? '' : soul.name,
+    );
   };
 
   const handleWorldSelect = (world) => {
-    setSelectedWorldName(world.mission);
+    setSelectedWorldName(
+      selectedWorldName === world.name ? '' : world.name,
+    );
   };
 
   const handleConfirm = () => {
-    const world = worlds.find((w) => w.mission === selectedWorldName);
+    const world = worlds.find((w) => w.name === selectedWorldName);
     const soul = souls.find((s) => s.name === selectedSoulName);
     if (!world || !soul) return;
 
@@ -37,28 +43,31 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
 
   return (
     <SelectionScreenLayout>
-      <SelectionTitle>REVIVAL SELECTION</SelectionTitle>
+      <SelectionTitle>Revival Selection</SelectionTitle>
 
       <Panel>
         <SectionTitle>Available Worlds</SectionTitle>
-        {worlds.map((world, index) => (
-          <OptionCard
-            key={world.mission + index}
-            onClick={() => handleWorldSelect(world)}
-            $active={selectedWorldName === world.mission}
-          >
-            <div>
-              <strong>{world.mission}</strong>
-            </div>
-            <div>Resources: {world.resources}</div>
-          </OptionCard>
-        ))}
+        <SelectionList>
+          {worlds.map((world, index) => (
+            <OptionCard
+              key={world.name + index}
+              onClick={() => handleWorldSelect(world)}
+              $active={selectedWorldName === world.name}
+            >
+              <div>
+                <strong>{worldText(world.name, 'name')}</strong>
+              </div>
+              <div>Description: {worldText(world.name, 'description')}</div>
+              <div>Mission: {worldText(world.name, 'mission')}</div>
+              <div>Resources: {world.resources}</div>
+            </OptionCard>
+          ))}
+        </SelectionList>
       </Panel>
 
       <Panel>
         <SectionTitle>Available Souls</SectionTitle>
-
-        <SoulsList>
+        <SelectionList>
           {souls.map((soul, index) => (
             <OptionCard
               key={soul.name + index}
@@ -68,7 +77,7 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
               <SoulCard soul={soul} selected={selectedSoulName === soul.name} />
             </OptionCard>
           ))}
-        </SoulsList>
+        </SelectionList>
       </Panel>
 
       <Panel>

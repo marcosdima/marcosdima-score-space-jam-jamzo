@@ -6,9 +6,16 @@ const Button = styled.button`
   border: none;
   padding: 10px 20px;
   font-size: ${props => props.theme.typography.size.medium};
+  border-radius: 5px;
   
   &:hover {
     opacity: 0.8;
+  }
+
+  &:disabled {
+    background-color: ${props => props.theme.colors.secondary};
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 `;
 

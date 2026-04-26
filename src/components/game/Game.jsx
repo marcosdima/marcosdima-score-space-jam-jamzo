@@ -21,21 +21,74 @@ const Game = () => {
     setController((prev) => [...prev, c]);
   };
 
+  const deleteController = (controller) => {
+    // Remove controller from the list.
+    setController((prev) => prev.filter((c) => c !== controller));
+
+    // Add world and soul back to available lists.
+    setWorlds((prev) => [...prev, controller.getState().world]);
+    setSouls((prev) => [...prev, controller.getState().host.soul]);
+  };
+
+  const gameStyle = {
+    padding: 16,
+    width: '100%',
+    maxWidth: 1200,
+    height: '82vh',
+    minHeight: 560,
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    border: '1px solid #ccc',
+    borderRadius: 8,
+    gap: 24,
+    boxSizing: 'border-box',
+    overflow: 'hidden',
+  };
+
+  const selectionStyle = {
+    flex: 1,
+    minWidth: 0,
+    height: '100%',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    paddingRight: 4,
+  };
+
+  const simulationStyle = {
+    flex: 1,
+    minWidth: 0,
+    height: '100%',
+    border: '1px solid #ccc',
+    borderRadius: 8,
+    padding: 16,
+    backgroundColor: '#f9f9f9',
+    boxSizing: 'border-box',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  };
+
   return (
-    <div style={{ padding: 16 }}>
-      <SelectionScreen
-        worlds={availableWorlds}
-        souls={availableSouls}
-        onSelect={(world, soul) => createController(world, soul)}
-      />
-      {
-        controllers.map((controller, idx) => (
-          <div key={idx} style={{ marginTop: 16 }}>
-            <h2>Simulation {idx + 1}</h2>
-            <WorldSimulation controller={controller} />
-          </div>
-        ))
-      }
+    <div style={gameStyle}>
+      <div style={selectionStyle}>
+        <SelectionScreen
+          worlds={availableWorlds}
+          souls={availableSouls}
+          onSelect={(world, soul) => createController(world, soul)}
+        />
+      </div>
+      <div style={simulationStyle}>
+        {
+          controllers.map((controller, idx) => (
+            <WorldSimulation
+              key={idx}
+              controller={controller}
+              onDelete={(controller) => deleteController(controller)}
+            />
+          ))
+        }
+      </div>
     </div>
   );
 };

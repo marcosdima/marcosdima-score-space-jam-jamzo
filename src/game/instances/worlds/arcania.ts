@@ -3,12 +3,13 @@ import { Milestone } from '../../core/world/milestone';
 import World from '../../core/world/world';
 import { StudyEvent, TrainingEvent } from '../events';
 
-
 const arcaniaMilestones: Milestone[] = [
   new Milestone(
     'Train to master the arcane arts',
     6,
-    (host) => host.stats.values[Stat.Strength] + host.stats.values[Stat.Intelligence] >= 20,
+    (host) =>
+      host.stats.values[Stat.Strength] + host.stats.values[Stat.Intelligence] >=
+      20,
   ),
   new Milestone(
     'Stabilize the mana wells',
@@ -18,17 +19,8 @@ const arcaniaMilestones: Milestone[] = [
   ),
 ];
 
-const arcania = new World(
-  'Restore balance to Arcania',
-  arcaniaMilestones,
-  [],
-  State.Peace,
-  85,
-);
+const arcania = new World('arcania', arcaniaMilestones, [], State.Peace, 85);
 
-arcania.eventPool = [
-  new TrainingEvent(arcania),
-  new StudyEvent(arcania),
-];
+arcania.eventPool = [new TrainingEvent(arcania), new StudyEvent(arcania)];
 
 export default arcania;

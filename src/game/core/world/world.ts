@@ -1,13 +1,12 @@
-import { Ending, State } from "../enums";
-import Host from "../host";
-import { Event } from "./event";
-import { Milestone } from "./milestone";
+import { Ending, State } from '../enums';
+import Host from '../host';
+import { Event } from './event';
+import { Milestone } from './milestone';
 
-type MilestoneState = "pending" | "complete" | "failed";
+type MilestoneState = 'pending' | 'complete' | 'failed';
 
 export default class World {
-  mission: string;
-
+  name: string;
   milestones: Map<Milestone, MilestoneState>;
   currentMilestone: Milestone;
 
@@ -20,15 +19,15 @@ export default class World {
   eventPool: Event[];
 
   constructor(
-    mission: string,
+    name: string,
     milestones: Milestone[],
     eventPool: Event[],
     initialState: State = State.Peace,
-    initialResources: number = 100
+    initialResources: number = 100,
   ) {
-    this.mission = mission;
+    this.name = name;
     this.milestones = new Map(
-      milestones.map((milestone) => [milestone, "pending" as MilestoneState])
+      milestones.map((milestone) => [milestone, 'pending' as MilestoneState]),
     );
     this.eventPool = eventPool;
     this.worldState = initialState;
@@ -60,9 +59,9 @@ export default class World {
       // NO more milestones means victory.
       this.ending = Ending.Victory;
     } else if (milestone.isCompleted(host, this)) {
-      this.milestones.set(milestone, "complete");
+      this.milestones.set(milestone, 'complete');
     } else if (milestone.isFailed(host, this)) {
-      this.milestones.set(milestone, "failed");
+      this.milestones.set(milestone, 'failed');
     }
 
     // Check death flags.
@@ -83,7 +82,7 @@ export default class World {
 
   getCurrentMilestone(): Milestone | null {
     for (const [milestone, state] of this.milestones.entries()) {
-      if (state === "pending") {
+      if (state === 'pending') {
         this.currentMilestone = milestone;
         return milestone;
       }
@@ -99,5 +98,7 @@ export default class World {
     }
   }
 
-  consumeResources(amount: number) { this.resources = Math.max(0, this.resources - amount); }
+  consumeResources(amount: number) {
+    this.resources = Math.max(0, this.resources - amount);
+  }
 }

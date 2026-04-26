@@ -42,6 +42,9 @@ export default class World {
     // If the world has already reached an ending, do nothing.
     if (this.ending !== Ending.OnGoing) return;
 
+    // Update state.
+    this.updateState();
+
     // Advance time.
     this.time++;
 
@@ -50,9 +53,6 @@ export default class World {
     if (event) {
       event.trigger(host);
     }
-
-    // Update state post event effects.
-    this.updateState();
 
     // Check milestones.
     const milestone = this.getCurrentMilestone();
@@ -102,5 +102,9 @@ export default class World {
 
   consumeResources(amount: number) {
     this.resources = Math.max(0, this.resources - amount);
+  }
+
+  setEnding(ending: Ending) {
+    this.ending = ending;
   }
 }

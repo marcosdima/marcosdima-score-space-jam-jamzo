@@ -48,16 +48,16 @@ const Game = () => {
   };
 
   const selectionStyle = {
-    flex: 1,
+    flex: 1.4,
     minWidth: 0,
     height: '100%',
-    overflowY: 'auto',
+    overflowY: 'hidden',
     overflowX: 'hidden',
     paddingRight: 4,
   };
 
   const simulationStyle = {
-    flex: 1,
+    flex: 0.6,
     minWidth: 0,
     height: '100%',
     border: '1px solid #ccc',

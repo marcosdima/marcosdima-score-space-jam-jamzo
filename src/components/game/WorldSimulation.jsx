@@ -1,21 +1,40 @@
 import { useRef, useState } from 'react';
 import { useI18n } from '@hooks';
 import { Ending } from '../../game';
-import { Button } from '../../styles';
+import { Button, SmallText, Title } from '../../styles';
 
 const SimulationCard = ({ world, host }) => {
-  const { worldText } = useI18n();
+  const { worldText, t } = useI18n();
+
+  const endingText = (ending, key) => {
+    return t(`game.endings.${ending}.${key}`);
+  };
+
+  const ended  = world.ending !== Ending.OnGoing;
+  const style = {
+    border: '1px solid #ccc',
+    padding: 16,
+    marginBottom: 16,
+    backgroundColor: ended ? '#9b9ecc' : '#d1e7dd',
+  };
+
+  if (ended) return (
+    <div style={style}>
+      <h3>{worldText(world.name, 'name')} Simulation - Ended</h3>
+      <SmallText>Soul: {host.soul.name}</SmallText>
+      <SmallText>Resources Left: {world.resources}</SmallText>
+      <SmallText>Ending: {endingText(world.ending, 'title')}</SmallText>
+      <SmallText>{endingText(world.ending, 'description')}</SmallText>
+    </div>
+  );
+  
   return (
-    <div style={{ border: '1px solid #ccc', padding: 16, marginBottom: 16 }}>
+    <div style={style}>
       <h3>{worldText(world.name, 'name')} Simulation</h3>
-      <p>Soul: {host.soul.name}</p>
-      <p>Time: {world.time}</p>
-      <p>Resources: {world.resources}</p>
-      {
-        world.ending === Ending.OnGoing 
-          ? <p>Milestone: {world.currentMilestone.name}</p>
-          : <p>Ending: {world.ending}</p>
-      }
+      <SmallText>Soul: {host.soul.name}</SmallText>
+      <SmallText>Time Remaining: {world.endsAt - world.time}</SmallText>
+      <SmallText>Resources: {world.resources}</SmallText>
+      <SmallText>Milestone: {world.currentMilestone.name}</SmallText>
     </div>
   );
 };
@@ -53,7 +72,7 @@ const WorldSimulation = ({ controller, onDelete }) => {
   if (world.time === 0) {
     return (
       <div style={{ padding: 16 }}>
-        <h2>{worldText(world.name, 'name')} Simulation</h2>
+        <Title>{worldText(world.name, 'name')} Simulation</Title>
 
         <div style={{ marginBottom: 10, gap: 8, display: 'flex' }}>
           <Button onClick={start}>

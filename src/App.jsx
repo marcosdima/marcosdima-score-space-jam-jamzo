@@ -1,8 +1,7 @@
 import { useTheme } from '@hooks';
 import { Base } from '@styles';
 import { ThemeProvider } from 'styled-components';
-import MainMenu from './components/MainMenu';
-
+import Game from './game/game';
 
 const App = () => {
   const { theme } = useTheme();
@@ -10,7 +9,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Base>
-        <MainMenu />
+        <Game />
       </Base>
     </ThemeProvider>
   );

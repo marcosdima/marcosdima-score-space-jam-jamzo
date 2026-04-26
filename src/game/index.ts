@@ -10,3 +10,7 @@ export { default as Stats } from './core/modules/stats';
 export { default as Traits } from './core/modules/traits';
 
 export { default as GameController } from './controller';
+
+// Enums.
+export { Ending, Stat, State, Trait } from './core/enums';
+

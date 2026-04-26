@@ -1,4 +1,4 @@
-import { Potential, Stat } from "./enums";
+import { Potential, Stat, Trait } from "./enums";
 import { Stats } from "./modules";
 import Soul from "./soul";
 
@@ -47,6 +47,10 @@ class Host {
 
   isDead() {
     return this.health <= 0;
+  }
+
+  hasTrait(trait: Trait) {
+    return this.soul.traits.has(trait);
   }
 }
 

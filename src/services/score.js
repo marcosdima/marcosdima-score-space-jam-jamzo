@@ -8,7 +8,13 @@ const USERNAME_KEY = 'username';
 const sortScores = (scores = []) => {
   return [...scores]
     .map((entry) => normalizeScoreEntry(entry))
-    .sort((left, right) => right.score - left.score || new Date(right.created_at) + new Date(left.created_at));
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      return new Date(left.created_at) - new Date(right.created_at);
+    });
 };
 
 export const getUsername = () => {

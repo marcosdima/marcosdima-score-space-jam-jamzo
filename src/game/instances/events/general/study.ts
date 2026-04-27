@@ -1,7 +1,7 @@
-import { Stat, State } from '../../core/enums';
-import Host from '../../core/host';
-import { Event } from '../../core/world/event';
-import World from '../../core/world/world';
+import { Stat, State, Trait } from '../../../core/enums';
+import Host from '../../../core/host';
+import { Event } from '../../../core/world/event';
+import World from '../../../core/world/world';
 
 class StudyEvent extends Event {
   constructor(world: World) {

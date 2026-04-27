@@ -16,3 +16,33 @@ export const Reo = new Soul(
   new Stats(1, 3, 4, 5, 6, 7),
   new Traits([Trait.Impulsive]),
 );
+
+export const Arianna = new Soul(
+  'Arianna',
+  new Potential(Rarity.Rare, Rarity.Rare, Rarity.Rare),
+  new Stats(
+    1,  // Strength.
+    3,  // Agility.
+    10,  // Intelligence.
+    2,  // Endurance.
+    6,  // Luck.
+    6,  // Mana.
+    15,  // Charm.
+  ),
+  new Traits([Trait.SocialButterfly, Trait.NatureLover]),
+);
+
+export const Jorge = new Soul(
+  'Jorge',
+  new Potential(Rarity.Common, Rarity.Rare, Rarity.Legendary),
+  new Stats(
+    10,  // Strength.
+    8,  // Agility.
+    2,  // Intelligence.
+    9,  // Endurance.
+    4,  // Luck.
+    1,  // Mana.
+    3,  // Charm.
+  ),
+  new Traits([Trait.Courious]),
+);

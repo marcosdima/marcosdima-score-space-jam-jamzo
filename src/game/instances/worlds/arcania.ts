@@ -5,17 +5,26 @@ import { StudyEvent, TrainingEvent } from '../events';
 
 const arcaniaMilestones: Milestone[] = [
   new Milestone(
-    'Train to master the arcane arts',
+    'train_mana_arts',
     6,
-    (host) =>
-      host.stats.values[Stat.Strength] + host.stats.values[Stat.Intelligence] >=
-      20,
+    {
+      completeRule: (host) =>
+        host.stats.values[Stat.Strength] + host.stats.values[Stat.Intelligence] >=
+        20,
+      failRule: (_host, world) => world.resources < 20 && world.time > 5,
+      completeEffect: (host, world) => (world.resources += 10),
+      failEffect: (host, world) => (world.resources -= 10),
+    },
   ),
   new Milestone(
-    'Stabilize the mana wells',
+    'stabilize_mana_flow',
     12,
-    (host, world) => host.stats.values[Stat.Mana] >= 18,
-    (_host, world) => world.resources < 15,
+    {
+      completeRule: (host, world) => host.stats.values[Stat.Mana] >= 18,
+      failRule: (_host, world) => world.resources < 15,
+      completeEffect: (host, world) => (world.resources += 10),
+      failEffect: (host, world) => (host.receiveDamage(100)),
+    },
   ),
 ];
 

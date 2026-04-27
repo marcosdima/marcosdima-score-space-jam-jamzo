@@ -1,39 +1,38 @@
 import Host from "../host";
 import World from "./world";
 
+type MilestoneActions = {
+  completeRule: (host: Host, world: World) => boolean;
+  failRule?: (host: Host, world: World) => boolean;
+  completeEffect?: (host: Host, world: World) => void;
+  failEffect?: (host: Host, world: World) => void;
+}
+
 export class Milestone {
   name: string;
   deadline: number;
-  private completeRule: (host: Host, world: World) => boolean;
-  private failRule: (host: Host, world: World) => boolean;
-  private completeEffect?: (host: Host, world: World) => void;
-  private failEffect?: (host: Host, world: World) => void;
+  private actions: MilestoneActions;
   private spareTime: number;
 
   constructor(
     name: string,
     deadline: number,
-    completeRule: (host: Host, world: World) => boolean = () => false,
-    failRule: (host: Host, world: World) => boolean = () => false,
-    completeEffect?: (host: Host, world: World) => void,
-    failEffect?: (host: Host, world: World) => void
+    actions: MilestoneActions,
   ) {
     this.name = name;
     this.deadline = deadline;
-    this.completeRule = completeRule;
-    this.failRule = failRule;
-    this.completeEffect = completeEffect;
-    this.failEffect = failEffect;
+    
+    this.actions = actions;
     this.spareTime = 0;
   }
 
   isCompleted(host: Host, world: World): boolean {
-    const completed = this.completeRule(host, world);
+    const completed = this.actions.completeRule(host, world);
 
     if (completed) {
       this.spareTime = this.deadline - world.time;
-      if (this.completeEffect) {
-        this.completeEffect(host, world);
+      if (this.actions.completeEffect) {
+        this.actions.completeEffect(host, world);
       }
     }
 
@@ -41,10 +40,10 @@ export class Milestone {
   }
 
   isFailed(host: Host, world: World): boolean {
-    const ended = this.failRule(host, world) || world.time >= this.deadline;
+    const ended = this.actions.failRule?.(host, world) || world.time >= this.deadline;
 
-    if (ended && this.failEffect) {
-      this.failEffect(host, world);
+    if (ended && this.actions.failEffect) {
+      this.actions.failEffect(host, world);
     }
 
     return ended;

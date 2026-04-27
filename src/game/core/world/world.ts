@@ -12,6 +12,7 @@ export default class World {
 
   worldState: State;
   resources: number;
+  trust: number;
   ending: Ending;
 
   time: number = 0;
@@ -36,6 +37,7 @@ export default class World {
     this.ending = Ending.OnGoing;
     this.currentMilestone = milestones[0];
     this.endsAt = milestones[milestones.length - 1].deadline;
+    this.trust = 100;
   }
 
   tick(host: Host) {
@@ -71,6 +73,8 @@ export default class World {
       this.ending = Ending.NotEnoughResources;
     } else if (host.isDead()) {
       this.ending = Ending.Killed;
+    } else if (this.trust <= 0) {
+      this.ending = Ending.Exiled;
     }
   }
 

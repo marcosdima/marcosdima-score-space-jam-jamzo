@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainMenuContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,14 +13,17 @@ export const MainMenuContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  padding: 3rem 2rem;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 14px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  max-width: 400px;
+  max-width: 960px;
   animation: slideUp 0.6s ease-out;
 
   @keyframes slideUp {

@@ -1,10 +1,12 @@
 // Components.
 export { default as Button } from './components/Button.styled.js';
+export { default as TextInput } from './components/TextInput.styled.js';
 export { Text, SmallText } from './components/Text.styled.js';
 export { Subtitle, SmallTitle, Title } from './components/Title.styled.js';
 
 // Containers.
 export { default as Base } from './containers/Base.styled.js';
+export { default as GlobalStyle } from './GlobalStyle.styled.js';
 
 export { default as Panel } from './containers/Panel.styled.js';
 export { PanelBody } from './containers/Panel.styled.js';

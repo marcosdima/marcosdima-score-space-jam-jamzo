@@ -6,6 +6,8 @@ const Base = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
   background: ${({ theme }) => theme.colors.bg};
 `;
 

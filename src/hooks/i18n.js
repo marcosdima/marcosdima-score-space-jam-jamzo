@@ -6,6 +6,7 @@ const translations = {
     menu: {
       play: 'Play',
       leaderboard: 'Leaderboard',
+      username: 'Username',
     },
     game: {
       worlds: {
@@ -99,13 +100,22 @@ const translations = {
     },
     leaderboard: {
       title: 'Leaderboard',
+      local_scores: 'Local scores',
+      online_scores: 'Online top 10',
+      username: 'Username',
       date: 'Date',
       score: 'Score',
+      loading_scores: 'Loading scores...',
+      unable_to_load_online_scores: 'Unable to load online scores.',
+      no_local_scores_yet: 'No local scores yet.',
+      no_online_scores_yet: 'No online scores yet.',
     },
     buttons: {
       go_back_to_menu: 'Go back to menu',
       clear_leaderboard: 'Clear leaderboard',
-      revive_selected_soul: 'Revive selected soul',
+      save_username: 'Save username',
+      refresh: 'Refresh',
+      revive_selected_soul: 'Revive soul',
       start_simulation: 'Start simulation',
       delete_simulaton: 'Delete simulation',
       see_the_results: 'See the results',
@@ -116,6 +126,7 @@ const translations = {
     menu: {
       play: 'Jugar',
       leaderboard: 'Tabla de clasificación',
+      username: 'Username',
     },
     game: {
       worlds: {
@@ -209,12 +220,21 @@ const translations = {
     },
     leaderboard: {
       title: 'Tabla de clasificación',
+      local_scores: 'Puntajes locales',
+      online_scores: 'Top 10 online',
+      username: 'Usuario',
       date: 'Fecha',
       score: 'Puntaje',
+      loading_scores: 'Cargando puntajes...',
+      unable_to_load_online_scores: 'No se pudieron cargar los puntajes online.',
+      no_local_scores_yet: 'Todavía no hay puntajes locales.',
+      no_online_scores_yet: 'Todavía no hay puntajes online.',
     },
     buttons: {
       go_back_to_menu: 'Volver al menú',
       clear_leaderboard: 'Limpiar tabla',
+      save_username: 'Guardar usuario',
+      refresh: 'Actualizar',
       revive_selected_soul: 'Revivir alma',
       start_simulation: 'Iniciar simulación',
       delete_simulaton: 'Eliminar simulación',

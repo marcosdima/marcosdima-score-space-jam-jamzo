@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useI18n } from '@hooks';
-import { localStorageService } from '@services';
+import { saveScore } from '@services';
 import GameController from '../../game/controller';
 import { Aren, Reo, Arianna, Jorge } from '../../game/instances/souls';
 import { Arcania, Thalos, Veijo, Perito } from '../../game/instances/worlds';
@@ -14,10 +14,14 @@ const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge];
 
 const Game = ({ onExit }) => {
   const { buttonText } = useI18n();
+
+  // Game logic states.
   const [controllers, setController] = useState([]);
   const [availableWorlds, setWorlds] = useState(WORLD_CLASSES.map((WorldClass) => new WorldClass()));
   const [availableSouls, setSouls] = useState(SOUL_CLASSES.map((SoulClass) => new SoulClass()));
   const [, setRefreshTick] = useState(0);
+
+  // Late game results.
   const [showResults, setShowResults] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -46,15 +50,8 @@ const Game = ({ onExit }) => {
   };
 
   const saveResults = () => {
-    const lastData = localStorageService.getElement('gameResults', []);
-
-    localStorageService.saveElement('gameResults', [
-      ...lastData,
-      {
-        date: new Date().toISOString(),
-        result: controllers.reduce((acc, controller) => acc + controller.getScore().total, 0),
-      },
-    ]);
+    const totalScore = controllers.reduce((acc, controller) => acc + controller.getScore().total, 0);
+    saveScore(totalScore);
     setSaved(true);
   };
 
@@ -65,6 +62,8 @@ const Game = ({ onExit }) => {
     setShowResults(false);
     setSaved(false);
   };
+
+  const startAllSimulations = () => {};
 
   const gameStyle = {
     padding: 16,
@@ -157,14 +156,14 @@ const Game = ({ onExit }) => {
           }
         </div>
         {
-          availableWorlds.length === 0 &&
-          <Button
-            style={resultsButtonStyle}
-            disabled={controllers.some((c) => !c.isFinished())}
-            onClick={() => setShowResults(true)}
-          >
-            {buttonText('see_the_results')}
-          </Button>
+          availableWorlds.length > 0 && (controllers.some((c) => !c.isFinished()) || controllers.length === 0)
+            ? <Button disabled={controllers.every((c) => c.isFinished())}>Start all</Button>
+            : <Button
+              style={resultsButtonStyle}
+              onClick={() => setShowResults(true)}
+            >
+              {buttonText('see_the_results')}
+            </Button>
         }
       </div>
     </div>

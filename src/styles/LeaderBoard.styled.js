@@ -2,29 +2,28 @@ import styled from 'styled-components';
 
 export const LeaderboardContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.colors.bg};
-  padding: 2rem;
 `;
 
 export const LeaderboardContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  padding: 2rem;
-  max-width: 600px;
-  width: 100%;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
+  padding: 14px;
+  max-width: 960px;
+  max-height: 100%;
+  min-width: 0;
   animation: slideUp 0.6s ease-out;
 
   @keyframes slideUp {
@@ -40,8 +39,9 @@ export const LeaderboardContent = styled.div`
 `;
 
 export const TableContainer = styled.div`
+  flex: 1;
   overflow-y: auto;
-  max-height: 50vh;
+  max-height: none;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
 

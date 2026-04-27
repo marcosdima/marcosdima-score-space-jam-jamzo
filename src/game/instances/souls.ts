@@ -48,7 +48,7 @@ export class Jorge extends Soul {
   constructor() {
     super(
       'Jorge',
-      new Potential(Rarity.Common, Rarity.Rare, Rarity.Legendary),
+      new Potential(Rarity.Common, Rarity.Legendary, Rarity.Common),
       new Stats(
         10,  // Strength.
         8,  // Agility.
@@ -96,7 +96,7 @@ export class Max extends Soul {
         5,  // Mana.
         1,  // Charm.
       ),
-      new Traits([Trait.Hyperactive]),
+      new Traits([Trait.Hyperactive, Trait.NatureHater]),
     );
   }
 }

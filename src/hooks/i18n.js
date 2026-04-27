@@ -135,6 +135,8 @@ const translations = {
         learn_language: 'Learn the language',
         gain_influence: 'Gain influence',
         unite_factions: 'Unite factions',
+        overcome_fear: 'Overcome your fears',
+        enjoy_your_life: 'Enjoy your life',
       },
       simulation: {
         time_remaining: 'Time Remaining',

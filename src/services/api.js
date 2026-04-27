@@ -6,7 +6,7 @@ const createDefaultUsername = () => `User${Math.floor(Math.random() * 10000)}`;
 export const normalizeScoreEntry = (entry = {}) => {
   const normalizedUsername = typeof entry.username === 'string' ? entry.username.trim() : '';
   const parsedScore = Number(entry.score ?? entry.result ?? 0);
-  const normalizedScore = Number.isFinite(parsedScore) ? parsedScore : 0;
+  const normalizedScore = Number.isFinite(parsedScore) ? Math.round(parsedScore) : 0;
 
   return {
     username: normalizedUsername || createDefaultUsername(),

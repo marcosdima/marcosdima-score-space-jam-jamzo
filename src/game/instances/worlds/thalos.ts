@@ -10,10 +10,8 @@ export default class Thalos extends World {
         'train_the_vanguard',
         8,
         {
-          completeRule: (host) =>
-          host.stats.values[Stat.Strength] + host.stats.values[Stat.Endurance] >=
-          28,
-          failRule: (_host, world) => world.resources < 20 && world.time > 5,
+          completeRule: (host) => host.stats.values[Stat.Strength] > 10,
+          failRule: (_host, world) => world.resources < 20,
           completeEffect: (host, world) => (world.resources += 10),
           failEffect: (host, world) => (host.receiveDamage(100)),
         },
@@ -23,8 +21,7 @@ export default class Thalos extends World {
         14,
         {
           completeRule: (host) =>
-            host.stats.values[Stat.Strength] >= 20 &&
-            host.stats.values[Stat.Luck] >= 10,
+            host.stats.values[Stat.Strength] >= 20,
           failRule: (_host, world) => world.resources < 10,
           completeEffect: (host, world) => (world.resources += 10),
           failEffect: (host, world) => (host.receiveDamage(100)),

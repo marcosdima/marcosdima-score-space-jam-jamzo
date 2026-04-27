@@ -9,8 +9,10 @@ import WorldSimulation from './WorldSimulation';
 import { Button, Subtitle } from '../../styles';
 import { ControllerResult } from './sub-components';
 
-const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito, Timbia, Weakland];
-const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge, Laura, Max];
+const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito, Timbia, Weakland]
+  .sort(() => Math.random() - 0.5);
+const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge, Laura, Max]
+  .sort(() => Math.random() - 0.5); ;
 
 const Game = ({ onExit }) => {
   const { buttonText } = useI18n();
@@ -45,6 +47,7 @@ const Game = ({ onExit }) => {
     setWorlds((prev) => [...prev, controller.getState().world]);
     setSouls((prev) => [...prev, controller.getState().host.soul]);
   };
+
 
   const handleSimulationFinish = () => {
     setRefreshTick((value) => value + 1);

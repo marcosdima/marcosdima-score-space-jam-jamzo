@@ -8,6 +8,8 @@ const GOOD_ENDING_BONUS: Partial<Record<Ending, number>> = {
   [Ending.DogDefeated]: 400,
   [Ending.DogDominatedTheWorld]: 300,
   [Ending.SeventeenBlack]: 17,
+  [Ending.Chill]: 200,
+  [Ending.Baited]: 1,
 };
 
 class GameController {
@@ -47,7 +49,7 @@ class GameController {
       endingBonus,
       milestoneBonus,
       resourceBonus,
-      total: endingBonus + milestoneBonus + resourceBonus,
+      total: Math.round(endingBonus + milestoneBonus + resourceBonus),
     };
   }
 

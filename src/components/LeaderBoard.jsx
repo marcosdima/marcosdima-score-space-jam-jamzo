@@ -110,8 +110,8 @@ const Leaderboard = ({ onExit }) => {
     <LeaderboardContainer>
       <LeaderboardContent>
         <Title>{t('leaderboard.title')}</Title>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', width: '100%' }}>
-          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'stretch', width: '100%', minHeight: 0, flex: 1 }}>
+          <div style={{ flex: 1, minWidth: 0, minHeight: 0, height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Text>{t('leaderboard.local_scores')}</Text>
             <ScoreTable
               scores={localScores}
@@ -129,7 +129,7 @@ const Leaderboard = ({ onExit }) => {
             </ButtonGroup>
           </div>
 
-          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 1, minWidth: 0, minHeight: 0, height: '100%', display: 'flex', flexDirection: 'column' }}>
             <PanelStatus
               title={t('leaderboard.online_scores')}
               loading={onlineLoading}

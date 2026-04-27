@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useI18n } from '@hooks';
 import { Ending } from '../../game';
 import { Button, SmallText, Title } from '../../styles';
@@ -44,13 +44,19 @@ const SimulationCard = ({ world, host }) => {
   );
 };
 
-const WorldSimulation = ({ controller, onDelete, onFinish }) => {
+const WorldSimulation = ({ controller, onDelete, onFinish, startSignal }) => {
   const [snapshot, setSnapshot] = useState(controller.getState());
   const [running, setRunning] = useState(false);
   const { worldText, buttonText } = useI18n();
   const loopRef = useRef(null);
+  const previousStartSignalRef = useRef(startSignal);
 
-  const tick = () => {
+  const stop = useCallback(() => {
+    setRunning(false);
+    if (loopRef.current) clearInterval(loopRef.current);
+  }, []);
+
+  const tick = useCallback(() => {
     controller.tick();
     setSnapshot(controller.getState());
 
@@ -58,22 +64,30 @@ const WorldSimulation = ({ controller, onDelete, onFinish }) => {
       onFinish?.();
       stop();
     }
-  };
+  }, [controller, onFinish, stop]);
 
-  const start = () => {
+  const start = useCallback(() => {
     if (running) return;
 
     setRunning(true);
     loopRef.current = setInterval(tick, 500);
-  };
-
-  const stop = () => {
-    setRunning(false);
-    if (loopRef.current) clearInterval(loopRef.current);
-  };
+  }, [running, tick]);
 
   const world = snapshot?.world;
   const host = snapshot?.host;
+
+  useEffect(() => {
+    if (previousStartSignalRef.current === startSignal) return;
+    previousStartSignalRef.current = startSignal;
+
+    if (!world || world.time !== 0) return;
+
+    const timeoutId = window.setTimeout(() => {
+      start();
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [startSignal, start, world]);
 
   if (world.time === 0) {
     return (
@@ -85,7 +99,7 @@ const WorldSimulation = ({ controller, onDelete, onFinish }) => {
             {buttonText('start_simulation')}
           </Button>
           <Button onClick={() => onDelete(controller)}>
-            {buttonText('delete_simulaton')}
+            {buttonText('delete_simulation')}
           </Button>
         </div>
       </div>

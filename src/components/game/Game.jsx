@@ -24,6 +24,7 @@ const Game = ({ onExit }) => {
   // Late game results.
   const [showResults, setShowResults] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [startAllSignal, setStartAllSignal] = useState(0);
 
   const createController = (world, soul) => {
     const c = new GameController(world, soul);
@@ -63,7 +64,15 @@ const Game = ({ onExit }) => {
     setSaved(false);
   };
 
-  const startAllSimulations = () => {};
+  const startAllSimulations = () => {
+    if (controllers.length === 0) return;
+
+    const hasNotStartedSimulations = controllers.some((controller) => controller.getState().world.time === 0);
+
+    if (!hasNotStartedSimulations) return;
+
+    setStartAllSignal((prev) => prev + 1);
+  };
 
   const gameStyle = {
     padding: 16,
@@ -133,6 +142,8 @@ const Game = ({ onExit }) => {
     );
   }
 
+  const allFinished = controllers.every((c) => c.isFinished());
+
   return (
     <div style={gameStyle}>
       <div style={selectionStyle}>
@@ -151,18 +162,24 @@ const Game = ({ onExit }) => {
                 controller={controller}
                 onDelete={(controller) => deleteController(controller)}
                 onFinish={handleSimulationFinish}
+                startSignal={startAllSignal}
               />
             ))
           }
         </div>
         {
-          availableWorlds.length > 0 && (controllers.some((c) => !c.isFinished()) || controllers.length === 0)
-            ? <Button disabled={controllers.every((c) => c.isFinished())}>Start all</Button>
-            : <Button
+          availableWorlds.length === 0 && allFinished && controllers.length !== 0
+            ? <Button
               style={resultsButtonStyle}
               onClick={() => setShowResults(true)}
             >
               {buttonText('see_the_results')}
+            </Button>
+            : <Button
+              onClick={startAllSimulations}
+              disabled={allFinished}
+            >
+              {buttonText('start_all')}
             </Button>
         }
       </div>

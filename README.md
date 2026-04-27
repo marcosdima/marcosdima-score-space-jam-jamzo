@@ -1,16 +1,34 @@
-# React + Vite
+# The Selection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Revive souls. Assign them new worlds. Shape their fate.**
 
-Currently, two official plugins are available:
+*The Selection* is a decision-based game where you take the role of a divine evaluator, choosing which souls are granted a second chance — and where they belong.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Each world values different traits. Each soul carries their own strengths and flaws.  
+Your task is to match them wisely.
 
-## React Compiler
+Some will thrive. Others will collapse.  
+There are no perfect choices — only consequences.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Gameplay
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Review a set of souls and worlds  
+- Assign each soul to a world  
+- Simulate the outcome  
+- Optimize your decisions for better results  
+
+---
+
+## Tech
+
+- **React** — interface and interaction (with Vite) 
+- **TypeScript** — simulation logic and systems  
+- **Supabase** — online leaderboard storage  
+
+---
+
+## Notes
+
+This project was developed for a game jam, focusing on a minimal but complete gameplay loop and system-driven design.

@@ -1,15 +1,19 @@
-import { useTheme } from '@hooks';
+import { useTheme, I18nProvider } from '@hooks';
 import { Base } from '@styles';
 import { ThemeProvider } from 'styled-components';
-import Game from './components/game/Game';
+import MainMenu from './components/MainMenu';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 const App = () => {
   const { theme } = useTheme();
   return (
     <ThemeProvider theme={theme}>
-      <Base>
-        <Game />
-      </Base>
+      <I18nProvider>
+        <LanguageSwitcher />
+        <Base>
+          <MainMenu />
+        </Base>
+      </I18nProvider>
     </ThemeProvider>
   );
 };

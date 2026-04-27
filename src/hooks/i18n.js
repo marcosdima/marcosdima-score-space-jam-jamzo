@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, createContext, useContext, createElement } from 'react';
 
 const translations = {
   en: {
     menu: {
       play: 'Play',
-      exit: 'Exit',
+      leaderboard: 'Leaderboard',
     },
     game: {
       worlds: {
@@ -100,7 +100,7 @@ const translations = {
   es: {
     menu: {
       play: 'Jugar',
-      exit: 'Salir',
+      leaderboard: 'Tabla de clasificación',
     },
     game: {
       worlds: {
@@ -195,8 +195,10 @@ const translations = {
   },
 };
 
-export function useI18n(defaultLang = 'en') {
-  const [lang, setLang] = useState(defaultLang);
+const I18nContext = createContext();
+
+export function I18nProvider({ children }) {
+  const [lang, setLang] = useState('en');
 
   const t = (key) => {
     const parsedKey = key
@@ -214,5 +216,17 @@ export function useI18n(defaultLang = 'en') {
     return t('game.worlds.' + worldName + '.' + key);
   };
 
-  return { t, lang, setLang, worldText };
+  return createElement(
+    I18nContext.Provider,
+    { value: { t, lang, setLang, worldText } },
+    children,
+  );
+}
+
+export function useI18n() {
+  const context = useContext(I18nContext);
+  if (!context) {
+    throw new Error('useI18n must be used within an I18nProvider');
+  }
+  return context;
 }

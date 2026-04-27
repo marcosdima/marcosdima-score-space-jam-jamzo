@@ -14,6 +14,10 @@ const SimulationCard = ({ world, host }) => {
     return t(`game.milestones.${milestone.name}`);
   };
 
+  const simulationText = (key) => {
+    return t(`game.simulation.${key}`);
+  };
+
   const ended  = world.ending !== Ending.OnGoing;
   const style = {
     border: '1px solid #ccc',
@@ -26,9 +30,9 @@ const SimulationCard = ({ world, host }) => {
   if (ended) return (
     <div style={style}>
       <h3>{worldText(world.name, 'name')} Simulation - Ended</h3>
-      <SmallText>Soul: {host.soul.name}</SmallText>
-      <SmallText>Resources Left: {world.resources}</SmallText>
-      <SmallText>Ending: {endingText(world.ending, 'title')}</SmallText>
+      <SmallText>{simulationText('soul')}: {host.soul.name}</SmallText>
+      <SmallText>{simulationText('resources_left')}: {world.resources}</SmallText>
+      <SmallText>{simulationText('ending')}: {endingText(world.ending, 'title')}</SmallText>
       <SmallText>{endingText(world.ending, 'description')}</SmallText>
     </div>
   );
@@ -36,10 +40,10 @@ const SimulationCard = ({ world, host }) => {
   return (
     <div style={style}>
       <h3>{worldText(world.name, 'name')} Simulation</h3>
-      <SmallText>Soul: {host.soul.name}</SmallText>
-      <SmallText>Time Remaining: {world.endsAt - world.time}</SmallText>
-      <SmallText>Resources: {world.resources}</SmallText>
-      <SmallText>Milestone: {milestoneText(world.currentMilestone)}</SmallText>
+      <SmallText>{simulationText('soul')}: {host.soul.name}</SmallText>
+      <SmallText>{simulationText('time_remaining')}: {world.endsAt - world.time}</SmallText>
+      <SmallText>{simulationText('resources')}: {world.resources}</SmallText>
+      <SmallText>{simulationText('milestone')}: {milestoneText(world.currentMilestone)}</SmallText>
     </div>
   );
 };

@@ -97,6 +97,14 @@ const translations = {
         identify_pathogen: 'Identify the pathogen',
         cure_illness: 'Cure the illness',
       },
+      simulation: {
+        time_remaining: 'Time Remaining',
+        resources: 'Resources',
+        milestone: 'Milestone',
+        soul: 'Soul',
+        resources_left: 'Resources Left',
+        ending: 'Ending',
+      },
     },
     leaderboard: {
       title: 'Leaderboard',
@@ -219,6 +227,14 @@ const translations = {
         save_the_village: 'Salvar la aldea',
         identify_pathogen: 'Identificar el patógeno',
         cure_illness: 'Curar la enfermedad',
+      },
+      simulation: {
+        time_remaining: 'Tiempo restante',
+        resources: 'Recursos',
+        milestone: 'Meta',
+        soul: 'Alma',
+        resources_left: 'Recursos restantes',
+        ending: 'Final',
       },
     },
     leaderboard: {

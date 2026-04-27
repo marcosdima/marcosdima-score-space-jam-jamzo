@@ -123,6 +123,7 @@ const translations = {
       try_again: 'Try again',
     },
     created_by: 'Created by',
+    title: 'The Selection ⋆⋆⋆',
   },
   es: {
     menu: {
@@ -245,6 +246,7 @@ const translations = {
       try_again: 'Intentar de nuevo',
     },
     created_by: 'Creado por',
+    title: 'La Selección ⋆⋆⋆',
   },
 };
 

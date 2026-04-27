@@ -23,7 +23,7 @@ const MainMenu = () => {
   return (
     <MainMenuContainer>
       <MainMenuContent>
-        <Title>La Selección ⋆⋆⋆</Title>
+        <Title>{t('title')}</Title>
         
         <ButtonContainer>
           <Button onClick={() => setTarget('play')}>

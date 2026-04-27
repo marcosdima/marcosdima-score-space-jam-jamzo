@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import GameController from '../../game/controller';
-import { Aren, Reo, Arianna, Jorge  } from '../../game/instances/souls';
-import { arcania, thalos, veijo, perito } from '../../game/instances/worlds';
+import { Aren, Reo, Arianna, Jorge } from '../../game/instances/souls';
+import { Arcania, Thalos, Veijo, Perito } from '../../game/instances/worlds';
 import SelectionScreen from './SelectionScreen';
 import WorldSimulation from './WorldSimulation';
+import { Button, Subtitle } from '../../styles';
+import { ControllerResult } from './sub-components';
 
-const WORLDS = [arcania, thalos, veijo, perito];
-const SOULS = [Aren, Reo, Arianna, Jorge];
+const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito];
+const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge];
 
-const Game = () => {
+const Game = ({ onExit }) => {
   const [controllers, setController] = useState([]);
-  const [availableWorlds, setWorlds] = useState([...WORLDS]);
-  const [availableSouls, setSouls] = useState([...SOULS]);
+  const [availableWorlds, setWorlds] = useState(WORLD_CLASSES.map((WorldClass) => new WorldClass()));
+  const [availableSouls, setSouls] = useState(SOUL_CLASSES.map((SoulClass) => new SoulClass()));
+  const [, setRefreshTick] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const createController = (world, soul) => {
     const c = new GameController(world, soul);
@@ -31,6 +36,34 @@ const Game = () => {
     // Add world and soul back to available lists.
     setWorlds((prev) => [...prev, controller.getState().world]);
     setSouls((prev) => [...prev, controller.getState().host.soul]);
+  };
+
+  const handleSimulationFinish = () => {
+    setRefreshTick((value) => value + 1);
+  };
+
+  const saveResults = () => {
+    const lastData = JSON.parse(localStorage.getItem('gameResults')) || [];
+    
+    localStorage.setItem(
+      'gameResults',
+      JSON.stringify([
+        ...lastData,
+        {
+          date: new Date().toISOString(),
+          result: controllers.reduce((acc, controller) => acc + controller.getScore().total, 0),
+        },
+      ]),
+    );
+    setSaved(true);
+  };
+
+  const cleanUp = () => {
+    setController([]);
+    setWorlds(WORLD_CLASSES.map((WorldClass) => new WorldClass()));
+    setSouls(SOUL_CLASSES.map((SoulClass) => new SoulClass()));
+    setShowResults(false);
+    setSaved(false);
   };
 
   const gameStyle = {
@@ -60,8 +93,7 @@ const Game = () => {
   };
 
   const simulationStyle = {
-    flex: 0.6,
-    minWidth: 0,
+    width: '100%',
     height: '100%',
     border: '1px solid #ccc',
     borderRadius: 8,
@@ -72,6 +104,36 @@ const Game = () => {
     overflowX: 'hidden',
   };
 
+  const rightColumnStyle = {
+    flex: 0.6,
+    minWidth: 0,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12,
+  };
+
+  const resultsButtonStyle = {
+    width: '100%',
+    flexShrink: 0,
+  };
+
+  if (showResults) {
+    if (!saved) saveResults();
+    return (
+      <div style={gameStyle}>
+        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+          <Subtitle>All simulations have finished!</Subtitle>
+          <ControllerResult controllers={controllers} />
+          <div style={{ display: 'flex', gap: 8 }}>
+            <Button onClick={cleanUp}>Try again</Button>
+            <Button onClick={onExit}>Go back to menu</Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={gameStyle}>
       <div style={selectionStyle}>
@@ -81,15 +143,28 @@ const Game = () => {
           onSelect={(world, soul) => createController(world, soul)}
         />
       </div>
-      <div style={simulationStyle}>
+      <div style={rightColumnStyle}>
+        <div style={simulationStyle}>
+          {
+            controllers.map((controller, idx) => (
+              <WorldSimulation
+                key={idx}
+                controller={controller}
+                onDelete={(controller) => deleteController(controller)}
+                onFinish={handleSimulationFinish}
+              />
+            ))
+          }
+        </div>
         {
-          controllers.map((controller, idx) => (
-            <WorldSimulation
-              key={idx}
-              controller={controller}
-              onDelete={(controller) => deleteController(controller)}
-            />
-          ))
+          availableWorlds.length === 0 &&
+          <Button
+            style={resultsButtonStyle}
+            disabled={controllers.some((c) => !c.isFinished())}
+            onClick={() => setShowResults(true)}
+          >
+            See the results
+          </Button>
         }
       </div>
     </div>

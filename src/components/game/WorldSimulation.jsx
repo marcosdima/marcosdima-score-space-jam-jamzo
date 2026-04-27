@@ -21,7 +21,7 @@ const SimulationCard = ({ world, host }) => {
     marginBottom: 16,
     backgroundColor: ended ? '#9b9ecc' : '#d1e7dd',
   };
-  console.log(world.ending);
+  
   if (ended) return (
     <div style={style}>
       <h3>{worldText(world.name, 'name')} Simulation - Ended</h3>
@@ -43,7 +43,7 @@ const SimulationCard = ({ world, host }) => {
   );
 };
 
-const WorldSimulation = ({ controller, onDelete }) => {
+const WorldSimulation = ({ controller, onDelete, onFinish }) => {
   const [snapshot, setSnapshot] = useState(controller.getState());
   const [running, setRunning] = useState(false);
   const { worldText } = useI18n();
@@ -54,6 +54,7 @@ const WorldSimulation = ({ controller, onDelete }) => {
     setSnapshot(controller.getState());
 
     if (controller.isFinished()) {
+      onFinish?.();
       stop();
     }
   };

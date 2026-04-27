@@ -9,6 +9,15 @@ export { default as Base } from './containers/Base.styled.js';
 export { default as Panel } from './containers/Panel.styled.js';
 export { PanelBody } from './containers/Panel.styled.js';
 
+// MainMenu.
+export { MainMenuContainer, MainMenuContent, ButtonContainer } from './MainMenu.styled.js';
+
+// Leaderboard.
+export { LeaderboardContainer, LeaderboardContent, TableContainer, ResultTable, ButtonGroup } from './LeaderBoard.styled.js';
+
+// LanguageSwitcher.
+export { LanguageSwitcherContainer, LanguageButton } from './LanguageSwitcher.styled.js';
+
 // Game components.
 export {
   ActionPanel,

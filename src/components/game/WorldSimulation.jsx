@@ -22,14 +22,25 @@ const SimulationCard = ({ world, host }) => {
   const style = {
     border: '1px solid #ccc',
     padding: 16,
-    marginBottom: 16,
     backgroundColor: ended ? '#9b9ecc' : '#d1e7dd',
     borderRadius: 5,
+    boxSizing: 'border-box',
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'auto',
+  };
+
+  const titleStyle = {
+    marginTop: 0,
+    overflowWrap: 'anywhere',
+    wordBreak: 'break-word',
   };
   
   if (ended) return (
     <div style={style}>
-      <h3>{worldText(world.name, 'name')} Simulation - Ended</h3>
+      <h3 style={titleStyle}>{worldText(world.name, 'name')} Simulation - Ended</h3>
       <SmallText>{simulationText('soul')}: {host.soul.name}</SmallText>
       <SmallText>{simulationText('resources_left')}: {world.resources}</SmallText>
       <SmallText>{simulationText('ending')}: {endingText(world.ending, 'title')}</SmallText>
@@ -39,7 +50,7 @@ const SimulationCard = ({ world, host }) => {
   
   return (
     <div style={style}>
-      <h3>{worldText(world.name, 'name')} Simulation</h3>
+      <h3 style={titleStyle}>{worldText(world.name, 'name')} Simulation</h3>
       <SmallText>{simulationText('soul')}: {host.soul.name}</SmallText>
       <SmallText>{simulationText('time_remaining')}: {world.endsAt - world.time}</SmallText>
       <SmallText>{simulationText('resources')}: {world.resources}</SmallText>
@@ -95,7 +106,7 @@ const WorldSimulation = ({ controller, onDelete, onFinish, startSignal }) => {
 
   if (world.time === 0) {
     return (
-      <div style={{ padding: 16 }}>
+      <div style={{ padding: 16, height: '100%', width: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
         <Title>{worldText(world.name, 'name')} Simulation</Title>
 
         <div style={{ marginBottom: 10, gap: 8, display: 'flex' }}>

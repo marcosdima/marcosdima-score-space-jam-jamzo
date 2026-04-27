@@ -28,7 +28,7 @@ const Stats = ({ stats }) => {
 
   return (
     <div>
-      <Subtitle>Stats</Subtitle>
+      <Subtitle>{t('game.labels.stats')}</Subtitle>
       <div style={statsStyqle}>
         {
           Object.keys(stats.values).map((stat) => (
@@ -71,7 +71,7 @@ const Traits = ({ traits }) => {
 
   return (
     <div>
-      <Subtitle>Traits</Subtitle>
+      <Subtitle>{t('game.labels.traits')}</Subtitle>
       <div style={traitsStyqle}>
         {
           traits.values.map((trait) => (

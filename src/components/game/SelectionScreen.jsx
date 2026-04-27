@@ -17,7 +17,7 @@ import { SoulCard } from './sub-components';
 const SelectionScreen = ({ worlds, souls, onSelect }) => {
   const [selectedWorldName, setSelectedWorldName] = useState('');
   const [selectedSoulName, setSelectedSoulName] = useState('');
-  const { worldText, buttonText } = useI18n();
+  const { worldText, buttonText, t } = useI18n();
 
   const handleSelect = (soul) => {
     setSelectedSoulName(
@@ -42,16 +42,16 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
   };
 
   if (worlds.length === 0) {
-    return <EmptyState>No worlds available for revival.</EmptyState>;
+    return <EmptyState>{t('game.labels.no_worlds_available')}</EmptyState>;
   }
 
   return (
     <SelectionScreenLayout>
-      <Title>Revival Selection</Title>
+      <Title>{t('game.labels.revival_selection')}</Title>
 
       <SelectionSplitRow>
         <SelectionPanel>
-          <Title>Available Worlds</Title>
+          <Title>{t('game.labels.available_worlds')}</Title>
           <SelectionList>
             {worlds.map((world, index) => (
               <OptionCard
@@ -63,15 +63,15 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
                   <Title>{worldText(world.name, 'name')}</Title>
                 </div>
                 <Text>{worldText(world.name, 'description')}</Text>
-                <Text>Mission: {worldText(world.name, 'mission')}</Text>
-                <Text>Resources: {world.resources}</Text>
+                <Text>{t('game.labels.mission')}: {worldText(world.name, 'mission')}</Text>
+                <Text>{t('game.labels.resources')}: {world.resources}</Text>
               </OptionCard>
             ))}
           </SelectionList>
         </SelectionPanel>
 
         <SelectionPanel>
-          <Title>Available Souls</Title>
+          <Title>{t('game.labels.available_souls')}</Title>
           <SelectionList>
             {souls.map((soul, index) => (
               <OptionCard

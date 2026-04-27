@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, Text, Title, LeaderboardContainer, LeaderboardContent, TableContainer, ResultTable, ButtonGroup } from '@styles';
 import { useI18n } from '../hooks/i18n';
 import { clearScores, getLocalScores, getOnlineScores } from '@services';
+import { getCachedOnlineScores } from '../services';
  
 const ScoreTable = ({ scores, emptyText }) => (
   <TableContainer>
@@ -64,7 +65,7 @@ const Leaderboard = ({ onExit }) => {
 
   // Scores.
   const [localScores, setLocalScores] = useState(() => getLocalScores());
-  const [onlineScores, setOnlineScores] = useState([]);
+  const [onlineScores, setOnlineScores] = useState(() => getCachedOnlineScores());
 
   // Flags.
   const [onlineLoading, setOnlineLoading] = useState(false);

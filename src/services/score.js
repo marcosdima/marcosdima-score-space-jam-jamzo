@@ -2,6 +2,7 @@ import { getElement, removeElement, saveElement } from './local-storage.js';
 import { getTopResults, normalizeScoreEntry, saveScore as saveOnlineScore } from './api.js';
 
 const LOCAL_SCORES_KEY = 'scores';
+const ONLINE_SCORES_CACHE_KEY = 'online-scores';
 const USERNAME_KEY = 'username';
 
 const sortScores = (scores = []) => {
@@ -38,8 +39,14 @@ export const getLocalScores = () => {
 
 export const getOnlineScores = async () => {
   const onlineScores = await getTopResults();
+  const sorted = sortScores(onlineScores);
+  saveElement(ONLINE_SCORES_CACHE_KEY, sorted);
+  return sorted;
+};
 
-  return sortScores(onlineScores);
+export const getCachedOnlineScores = () => {
+  const cachedScores = getElement(ONLINE_SCORES_CACHE_KEY, []);
+  return Array.isArray(cachedScores) ? sortScores(cachedScores) : [];
 };
 
 export const saveScore = (score) => {

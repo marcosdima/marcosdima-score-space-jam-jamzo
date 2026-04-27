@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import GameController from '../../game/controller';
-import { Aren, Reo } from '../../game/instances/souls';
-import { arcania, thalos } from '../../game/instances/worlds';
+import { Aren, Reo, Arianna, Jorge  } from '../../game/instances/souls';
+import { arcania, thalos, veijo, perito } from '../../game/instances/worlds';
 import SelectionScreen from './SelectionScreen';
 import WorldSimulation from './WorldSimulation';
 
+const WORLDS = [arcania, thalos, veijo, perito];
+const SOULS = [Aren, Reo, Arianna, Jorge];
+
 const Game = () => {
   const [controllers, setController] = useState([]);
-  const [availableWorlds, setWorlds] = useState([arcania, thalos]);
-  const [availableSouls, setSouls] = useState([Aren, Reo]);
-  
+  const [availableWorlds, setWorlds] = useState([...WORLDS]);
+  const [availableSouls, setSouls] = useState([...SOULS]);
+
   const createController = (world, soul) => {
     const c = new GameController(world, soul);
 

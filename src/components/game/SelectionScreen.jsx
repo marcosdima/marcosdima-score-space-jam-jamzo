@@ -37,6 +37,8 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
     if (!world || !soul) return;
 
     onSelect(world, soul);
+    setSelectedSoulName('');
+    setSelectedWorldName('');
   };
 
   if (worlds.length === 0) {

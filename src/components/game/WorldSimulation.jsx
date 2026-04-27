@@ -20,6 +20,7 @@ const SimulationCard = ({ world, host }) => {
     padding: 16,
     marginBottom: 16,
     backgroundColor: ended ? '#9b9ecc' : '#d1e7dd',
+    borderRadius: 5,
   };
   
   if (ended) return (

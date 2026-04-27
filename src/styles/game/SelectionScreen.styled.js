@@ -8,6 +8,19 @@ const SelectionScreenLayout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 0;
+
+  animation: slideUp 0.6s ease-out;
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const SelectionTitle = styled.h2`

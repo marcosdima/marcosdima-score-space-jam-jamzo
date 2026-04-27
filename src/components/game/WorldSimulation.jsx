@@ -21,7 +21,7 @@ const SimulationCard = ({ world, host }) => {
     marginBottom: 16,
     backgroundColor: ended ? '#9b9ecc' : '#d1e7dd',
   };
-
+  console.log(world.ending);
   if (ended) return (
     <div style={style}>
       <h3>{worldText(world.name, 'name')} Simulation - Ended</h3>

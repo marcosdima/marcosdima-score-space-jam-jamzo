@@ -1,5 +1,5 @@
 import { useI18n } from '../../../hooks/i18n';
-import { SmallTitle, Soul, Subtitle, Title, SmallText } from '../../../styles';
+import { Soul, Subtitle, Title, SmallText } from '../../../styles';
 
 const Stats = ({ stats }) => {
   const { t } = useI18n();

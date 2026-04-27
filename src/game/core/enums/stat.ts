@@ -5,5 +5,6 @@ enum Stat {
   Endurance = 'endurance',
   Luck = 'luck',
   Mana = 'mana',
+  Charm = 'charm',
 }
 export default Stat;

@@ -13,6 +13,7 @@ export default class Stats {
     endurance: number = 0,
     luck: number = 0,
     mana: number = 0,
+    charm: number = 0
   ) {
     this.values = {
       [Stat.Strength]: strength,
@@ -21,6 +22,7 @@ export default class Stats {
       [Stat.Endurance]: endurance,
       [Stat.Luck]: luck,
       [Stat.Mana]: mana,
+      [Stat.Charm]: charm,
     };
   }
 
@@ -32,6 +34,7 @@ export default class Stats {
       this.values[Stat.Endurance],
       this.values[Stat.Luck],
       this.values[Stat.Mana],
+      this.values[Stat.Charm]
     );
   }
 
@@ -55,6 +58,6 @@ export default class Stats {
   }
 
   static isMental(stat: Stat): boolean {
-    return [Stat.Intelligence].includes(stat);
+    return [Stat.Intelligence, Stat.Charm].includes(stat);
   }
 }

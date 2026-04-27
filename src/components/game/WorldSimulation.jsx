@@ -47,7 +47,7 @@ const SimulationCard = ({ world, host }) => {
 const WorldSimulation = ({ controller, onDelete, onFinish }) => {
   const [snapshot, setSnapshot] = useState(controller.getState());
   const [running, setRunning] = useState(false);
-  const { worldText } = useI18n();
+  const { worldText, buttonText } = useI18n();
   const loopRef = useRef(null);
 
   const tick = () => {
@@ -82,10 +82,10 @@ const WorldSimulation = ({ controller, onDelete, onFinish }) => {
 
         <div style={{ marginBottom: 10, gap: 8, display: 'flex' }}>
           <Button onClick={start}>
-            Start Simulation
+            {buttonText('start_simulation')}
           </Button>
           <Button onClick={() => onDelete(controller)}>
-            Delete Simulation
+            {buttonText('delete_simulaton')}
           </Button>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import { useState, createContext, useContext, createElement } from 'react';
+import { useEffect, useState, createContext, useContext, createElement } from 'react';
+import { localStorageService } from '@services';
 
 const translations = {
   en: {
@@ -96,6 +97,20 @@ const translations = {
         cure_illness: 'Cure the illness',
       },
     },
+    leaderboard: {
+      title: 'Leaderboard',
+      date: 'Date',
+      score: 'Score',
+    },
+    buttons: {
+      go_back_to_menu: 'Go back to menu',
+      clear_leaderboard: 'Clear leaderboard',
+      revive_selected_soul: 'Revive selected soul',
+      start_simulation: 'Start simulation',
+      delete_simulaton: 'Delete simulation',
+      see_the_results: 'See the results',
+      try_again: 'Try again',
+    },
   },
   es: {
     menu: {
@@ -192,13 +207,35 @@ const translations = {
         cure_illness: 'Curar la enfermedad',
       },
     },
+    leaderboard: {
+      title: 'Tabla de clasificación',
+      date: 'Fecha',
+      score: 'Puntaje',
+    },
+    buttons: {
+      go_back_to_menu: 'Volver al menú',
+      clear_leaderboard: 'Limpiar tabla',
+      revive_selected_soul: 'Revivir alma',
+      start_simulation: 'Iniciar simulación',
+      delete_simulaton: 'Eliminar simulación',
+      see_the_results: 'Ver resultados',
+      try_again: 'Intentar de nuevo',
+    },
   },
 };
 
 const I18nContext = createContext();
 
 export function I18nProvider({ children }) {
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState(() => {
+    const savedLang = localStorageService.getElement('lang', 'en');
+
+    return translations[savedLang] ? savedLang : 'en';
+  });
+
+  useEffect(() => {
+    localStorageService.saveElement('lang', lang);
+  }, [lang]);
 
   const t = (key) => {
     const parsedKey = key
@@ -216,9 +253,21 @@ export function I18nProvider({ children }) {
     return t('game.worlds.' + worldName + '.' + key);
   };
 
+  const buttonText = (buttonKey) => {
+    return t('buttons.' + buttonKey);
+  };
+
   return createElement(
     I18nContext.Provider,
-    { value: { t, lang, setLang, worldText } },
+    {
+      value: {
+        t,
+        lang,
+        setLang,
+        worldText,
+        buttonText,
+      },
+    },
     children,
   );
 }

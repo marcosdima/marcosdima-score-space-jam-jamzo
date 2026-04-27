@@ -17,7 +17,7 @@ import { SoulCard } from './sub-components';
 const SelectionScreen = ({ worlds, souls, onSelect }) => {
   const [selectedWorldName, setSelectedWorldName] = useState('');
   const [selectedSoulName, setSelectedSoulName] = useState('');
-  const { worldText } = useI18n();
+  const { worldText, buttonText } = useI18n();
 
   const handleSelect = (soul) => {
     setSelectedSoulName(
@@ -91,7 +91,7 @@ const SelectionScreen = ({ worlds, souls, onSelect }) => {
           disabled={!selectedWorldName || !selectedSoulName}
           onClick={handleConfirm}
         >
-          Revive Selected Soul
+          {buttonText('revive_selected_soul')}
         </Button>
       </ActionPanel>
     </SelectionScreenLayout>

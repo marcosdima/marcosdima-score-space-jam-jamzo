@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useI18n } from '@hooks';
+import { localStorageService } from '@services';
 import GameController from '../../game/controller';
 import { Aren, Reo, Arianna, Jorge } from '../../game/instances/souls';
 import { Arcania, Thalos, Veijo, Perito } from '../../game/instances/worlds';
@@ -11,6 +13,7 @@ const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito];
 const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge];
 
 const Game = ({ onExit }) => {
+  const { buttonText } = useI18n();
   const [controllers, setController] = useState([]);
   const [availableWorlds, setWorlds] = useState(WORLD_CLASSES.map((WorldClass) => new WorldClass()));
   const [availableSouls, setSouls] = useState(SOUL_CLASSES.map((SoulClass) => new SoulClass()));
@@ -43,18 +46,15 @@ const Game = ({ onExit }) => {
   };
 
   const saveResults = () => {
-    const lastData = JSON.parse(localStorage.getItem('gameResults')) || [];
-    
-    localStorage.setItem(
-      'gameResults',
-      JSON.stringify([
-        ...lastData,
-        {
-          date: new Date().toISOString(),
-          result: controllers.reduce((acc, controller) => acc + controller.getScore().total, 0),
-        },
-      ]),
-    );
+    const lastData = localStorageService.getElement('gameResults', []);
+
+    localStorageService.saveElement('gameResults', [
+      ...lastData,
+      {
+        date: new Date().toISOString(),
+        result: controllers.reduce((acc, controller) => acc + controller.getScore().total, 0),
+      },
+    ]);
     setSaved(true);
   };
 
@@ -126,8 +126,8 @@ const Game = ({ onExit }) => {
           <Subtitle>All simulations have finished!</Subtitle>
           <ControllerResult controllers={controllers} />
           <div style={{ display: 'flex', gap: 8 }}>
-            <Button onClick={cleanUp}>Try again</Button>
-            <Button onClick={onExit}>Go back to menu</Button>
+            <Button onClick={cleanUp}>{buttonText('try_again')}</Button>
+            <Button onClick={onExit}>{buttonText('go_back_to_menu')}</Button>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ const Game = ({ onExit }) => {
             disabled={controllers.some((c) => !c.isFinished())}
             onClick={() => setShowResults(true)}
           >
-            See the results
+            {buttonText('see_the_results')}
           </Button>
         }
       </div>

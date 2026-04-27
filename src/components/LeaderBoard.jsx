@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Button, Text, Title, LeaderboardContainer, LeaderboardContent, TableContainer, ResultTable, ButtonGroup } from '@styles';
+import { useI18n } from '../hooks/i18n';
+import { localStorageService } from '@services';
 
 const Leaderboard = ({ onExit }) => {
-  const [results, setResults] = useState(JSON.parse(localStorage.getItem('gameResults')) || []);
+  const { buttonText } = useI18n();
+  const [results, setResults] = useState(() => localStorageService.getElement('gameResults', []));
  
   const sortedResults = [...results].sort((a, b) => b.result - a.result);
 
@@ -38,13 +41,13 @@ const Leaderboard = ({ onExit }) => {
         </TableContainer>
         <ButtonGroup>
           <Button onClick={onExit}>
-            Go back to menu
+            {buttonText('go_back_to_menu')}
           </Button>
           <Button onClick={() => {
-            localStorage.removeItem('gameResults');
+            localStorageService.removeElement('gameResults');
             setResults([]);
           }}>
-            Clear leaderboard
+            {buttonText('clear_leaderboard')}
           </Button>
         </ButtonGroup>
       </LeaderboardContent>

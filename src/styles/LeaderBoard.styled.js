@@ -44,24 +44,9 @@ export const TableContainer = styled.div`
   max-height: 50vh;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
 
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.primary};
-    border-radius: 10px;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.secondary};
-    }
-  }
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.primary} rgba(255, 255, 255, 0.05);
 `;
 
 export const ResultTable = styled.table`

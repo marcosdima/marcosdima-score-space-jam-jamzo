@@ -8,6 +8,7 @@ const Button = styled.button`
   font-size: ${props => props.theme.typography.size.medium};
   border-radius: 5px;
   font-family: ${props => props.theme.typography.font};
+  cursor: pointer;
   
   &:hover {
     opacity: 0.8;

@@ -10,6 +10,10 @@ const SimulationCard = ({ world, host }) => {
     return t(`game.endings.${ending}.${key}`);
   };
 
+  const milestoneText = (milestone) => {
+    return t(`game.milestones.${milestone.name}`);
+  };
+
   const ended  = world.ending !== Ending.OnGoing;
   const style = {
     border: '1px solid #ccc',
@@ -34,7 +38,7 @@ const SimulationCard = ({ world, host }) => {
       <SmallText>Soul: {host.soul.name}</SmallText>
       <SmallText>Time Remaining: {world.endsAt - world.time}</SmallText>
       <SmallText>Resources: {world.resources}</SmallText>
-      <SmallText>Milestone: {world.currentMilestone.name}</SmallText>
+      <SmallText>Milestone: {milestoneText(world.currentMilestone)}</SmallText>
     </div>
   );
 };

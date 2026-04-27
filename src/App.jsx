@@ -1,6 +1,7 @@
 import { useTheme, I18nProvider } from '@hooks';
 import { Base, GlobalStyle } from '@styles';
 import { ThemeProvider } from 'styled-components';
+import Footer from './components/Footer';
 import MainMenu from './components/MainMenu';
 import LanguageSwitcher from './components/LanguageSwitcher';
 
@@ -14,6 +15,7 @@ const App = () => {
         <Base>
           <MainMenu />
         </Base>
+        <Footer />
       </I18nProvider>
     </ThemeProvider>
   );

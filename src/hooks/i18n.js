@@ -113,7 +113,7 @@ const translations = {
     buttons: {
       go_back_to_menu: 'Go back to menu',
       clear_leaderboard: 'Clear leaderboard',
-      save_username: 'Save username',
+      save_username: 'Save',
       refresh: 'Refresh',
       start_all: 'Start all',
       revive_selected_soul: 'Revive soul',
@@ -122,6 +122,7 @@ const translations = {
       see_the_results: 'See the results',
       try_again: 'Try again',
     },
+    created_by: 'Created by',
   },
   es: {
     menu: {
@@ -223,7 +224,7 @@ const translations = {
       title: 'Tabla de clasificación',
       local_scores: 'Puntajes locales',
       online_scores: 'Top 10 online',
-      username: 'Usuario',
+      username: 'Username',
       date: 'Fecha',
       score: 'Puntaje',
       loading_scores: 'Cargando puntajes...',
@@ -234,7 +235,7 @@ const translations = {
     buttons: {
       go_back_to_menu: 'Volver al menú',
       clear_leaderboard: 'Limpiar tabla',
-      save_username: 'Guardar usuario',
+      save_username: 'Guardar',
       refresh: 'Actualizar',
       start_all: 'Iniciar todas',
       revive_selected_soul: 'Revivir alma',
@@ -243,6 +244,7 @@ const translations = {
       see_the_results: 'Ver resultados',
       try_again: 'Intentar de nuevo',
     },
+    created_by: 'Creado por',
   },
 };
 

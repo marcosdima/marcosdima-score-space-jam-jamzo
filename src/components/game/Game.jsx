@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useI18n } from '@hooks';
 import { saveScore } from '@services';
 import GameController from '../../game/controller';
-import { Aren, Reo, Arianna, Jorge } from '../../game/instances/souls';
-import { Arcania, Thalos, Veijo, Perito } from '../../game/instances/worlds';
+import { Aren, Reo, Arianna, Jorge, Laura, Max } from '../../game/instances/souls';
+import { Arcania, Thalos, Veijo, Perito, Timbia, Weakland } from '../../game/instances/worlds';
 import SelectionScreen from './SelectionScreen';
 import WorldSimulation from './WorldSimulation';
 import { Button, Subtitle } from '../../styles';
 import { ControllerResult } from './sub-components';
 
-const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito];
-const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge];
+const WORLD_CLASSES = [Arcania, Thalos, Veijo, Perito, Timbia, Weakland];
+const SOUL_CLASSES = [Aren, Reo, Arianna, Jorge, Laura, Max];
 
 const Game = ({ onExit }) => {
   const { buttonText } = useI18n();

@@ -7,6 +7,7 @@ const GOOD_ENDING_BONUS: Partial<Record<Ending, number>> = {
   [Ending.Victory]: 500,
   [Ending.DogDefeated]: 400,
   [Ending.DogDominatedTheWorld]: 300,
+  [Ending.SeventeenBlack]: 17,
 };
 
 class GameController {
@@ -40,10 +41,13 @@ class GameController {
       0,
     );
 
+    const resourceBonus = Math.max(0, (this.world.resources - 50) * 1.5);
+
     return {
       endingBonus,
       milestoneBonus,
-      total: endingBonus + milestoneBonus,
+      resourceBonus,
+      total: endingBonus + milestoneBonus + resourceBonus,
     };
   }
 

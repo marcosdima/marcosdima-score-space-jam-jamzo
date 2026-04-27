@@ -8,5 +8,7 @@ enum Traits {
   NatureLover = 'nature_lover',
   SocialButterfly = 'social_butterfly',
   Loner = 'loner',
+  PlainWeak = 'plain_weak',
+  Hyperactive = 'hyperactive',
 };
 export default Traits;

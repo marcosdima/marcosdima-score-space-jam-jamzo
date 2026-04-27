@@ -30,6 +30,16 @@ const translations = {
           description: 'The princess dog has been kidnapped!',
           mission: 'Save the princess dog.',
         },
+        timbia: {
+          name: 'Timbia',
+          description: 'A world of politics and money.',
+          mission: 'Gain a lot of influence and money! But don\'t overdo it...',
+        },
+        weakland: {
+          name: 'Weakland',
+          description: 'Just weak people belong here.',
+          mission: 'Live as a weak person.',
+        },
       },
       stats: {
         strength: 'Strength',
@@ -50,6 +60,8 @@ const translations = {
         nature_lover: 'Nature Lover',
         social_butterfly: 'Social Butterfly',
         loner: 'Loner',
+        plain_weak: 'Plain Weak',
+        hyperactive: 'Hyperactive',
       },
       endings: {
         killed: {
@@ -84,6 +96,30 @@ const translations = {
           title: 'Dog Dominated the World',
           description: 'No one expected the dog to be the real threat... If only you had distrusted dogs from the start.',
         },
+        bankruptcy: {
+          title: 'Bankruptcy',
+          description: 'You gambled everything away! Hope you have BETTER LUCK next time.',
+        },
+        wealth_accumulation: {
+          title: 'Wealth Accumulation',
+          description: 'You broke the world economy... Hope you have LESS LUCK next time.',
+        },
+        seventeen_black: {
+          title: 'Seventeen Black',
+          description: 'diemarchive would be proud of you.',
+        },
+        chill: {
+          title: 'Chill',
+          description: 'You just chilled through your whole life. Not bad, not bad at all.',
+        },
+        baited: {
+          title: 'Baited',
+          description: 'You got baited by the best, me ?)',
+        },
+        boredom: {
+          title: 'Boredom',
+          description: 'You can not handle the boredom. Maybe try a more exciting world next time?',
+        },
       },
       milestones: {
         train_mana_arts: 'Train to master the arcane arts',
@@ -96,6 +132,9 @@ const translations = {
         save_the_village: 'Save the village',
         identify_pathogen: 'Identify the pathogen',
         cure_illness: 'Cure the illness',
+        learn_language: 'Learn the language',
+        gain_influence: 'Gain influence',
+        unite_factions: 'Unite factions',
       },
       simulation: {
         time_remaining: 'Time Remaining',
@@ -104,6 +143,13 @@ const translations = {
         soul: 'Soul',
         resources_left: 'Resources Left',
         ending: 'Ending',
+      },
+      result: {
+        title: 'Let\'s calculate the results:',
+        ending_bonus: 'Ending Bonus',
+        milestone_bonus: 'Milestone Bonus',
+        resource_bonus: 'Resource Bonus',
+        total_score: 'Total Score',
       },
     },
     leaderboard: {
@@ -161,6 +207,16 @@ const translations = {
           description: '¡El perro de la princesa ha sido secuestrado!',
           mission: 'Salva al perro de la princesa.',
         },
+        timbia: {
+          name: 'Timbia',
+          description: 'Un mundo de política y casinos.',
+          mission: '¡Gana mucha influencia y dinero! Pero no te pases...',
+        },
+        weakland: {
+          name: 'Fragilandia ¿)',
+          description: 'Solo los débiles pertenecen aquí.',
+          mission: 'Vive como una persona débil.',
+        },
       },
       stats: {
         strength: 'Fuerza',
@@ -181,6 +237,8 @@ const translations = {
         nature_hater: 'Anti-naturaleza',
         social_butterfly: 'Extrovertido',
         loner: 'Solitario',
+        plain_weak: 'Simplemente débil',
+        hyperactive: 'Hiperactivo',
       },
       endings: {
         killed: {
@@ -215,6 +273,30 @@ const translations = {
           title: 'El Perro Dominó el Mundo',
           description: 'Nadie esperaba que el perro fuera la verdadera amenaza... Si tan solo hubieses desconfiado de los perros desde el principio.',
         },
+        bankruptcy: {
+          title: 'Bancarrota',
+          description: 'Te timbiaste todo! Espero tengas MEJOR SUERTE la próxima.',
+        },
+        wealth_accumulation: {
+          title: 'Acumulación de Riqueza',
+          description: 'Rompiste la economía mundial... Espero tengas MENOS SUERTE la próxima.',
+        },
+        seventeen_black: {
+          title: 'Diecisiete Negro',
+          description: 'diemarchive estaría orgulloso de ti.',
+        },
+        chill: {
+          title: 'Tranquilidad',
+          description: 'Simplemente disfrutaste de la tranquilidad. Nada mal.',
+        },
+        baited: {
+          title: 'Baiteado',
+          description: 'Caiste ante el mejor, yo ¿)',
+        },
+        boredom: {
+          title: 'Aburrimiento',
+          description: 'No pudiste manejar el aburrimiento. Tal vez intenta con un mundo más emocionante la próxima vez.',
+        },
       },
       milestones: {
         train_mana_arts: 'Entrenar para dominar las artes arcanas',
@@ -227,6 +309,11 @@ const translations = {
         save_the_village: 'Salvar la aldea',
         identify_pathogen: 'Identificar el patógeno',
         cure_illness: 'Curar la enfermedad',
+        learn_language: 'Aprender el idioma',
+        gain_influence: 'Ganar influencia',
+        unite_factions: 'Unir facciones',
+        overcome_fear: 'Supera tus miedos',
+        enjoy_your_life: 'Disfruta tu vida',
       },
       simulation: {
         time_remaining: 'Tiempo restante',
@@ -235,6 +322,13 @@ const translations = {
         soul: 'Alma',
         resources_left: 'Recursos restantes',
         ending: 'Final',
+      },
+      result: {
+        title: 'Vamos a calcular los resultados:',
+        ending_bonus: 'Bonus de final',
+        milestone_bonus: 'Bonus por metas',
+        resource_bonus: 'Bonus de recursos',
+        total_score: 'Puntaje Total',
       },
     },
     leaderboard: {

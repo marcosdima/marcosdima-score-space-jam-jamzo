@@ -7,14 +7,15 @@ import {
 } from '../../../styles/game/ControllerResult.styled.js';
 
 const ControllerResult = ({ controllers }) => {
-  const { worldText } = useI18n();
+  const { worldText, t } = useI18n();
+  const resultText = (key) => t(`game.result.${key}`);
   return (
     <ControllerResultLayout>
-      <Text>Lets calculate the results:</Text>
+      <Text>{resultText('title')}</Text>
 
       <ControllerResultList>
         {controllers.map((controller, index) => {
-          const { endingBonus, milestoneBonus, total } = controller.getScore();
+          const { endingBonus, milestoneBonus, resourceBonus, total } = controller.getScore();
           const { host, world } = controller.getState();
 
           return (
@@ -22,9 +23,10 @@ const ControllerResult = ({ controllers }) => {
               <Subtitle>
                 {host.soul.name} in {worldText(world.name, 'name')}
               </Subtitle>
-              <SmallText>Ending Bonus: {endingBonus}</SmallText>
-              <SmallText>Milestone Bonus: {milestoneBonus}</SmallText>
-              <SmallText>Total Score: {total}</SmallText>
+              <SmallText>{resultText('ending_bonus')}: {endingBonus}</SmallText>
+              <SmallText>{resultText('milestone_bonus')}: {milestoneBonus}</SmallText>
+              <SmallText>{resultText('resource_bonus')}: {resourceBonus}</SmallText>
+              <SmallText>{resultText('total_score')}: {total}</SmallText>
             </ControllerResultCard>
           );
         })}

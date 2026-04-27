@@ -6,7 +6,7 @@ import World from '../../../core/world/world';
 
 class Gamble extends Event {
   constructor(world: World) {
-    super('gamble', world, [State.Peace, State.Tension]);
+    super('gamble', world, [State.Tension]);
   }
 
   trigger(host: Host) {
@@ -14,8 +14,13 @@ class Gamble extends Event {
 
     const hostLuck = host.stats.getStat(Stat.Luck);
 
-    if (hostLuck < 5) {
+    if (host.hasTrait(Trait.Impulsive)) {
+      this.world.setEnding(Ending.SeventeenBlack);  
+      return;
+    }
+    else if (hostLuck < 5) {
       this.world.resources = 0;
+      this.world.setEnding(Ending.Bankruptcy);
       return;
     } else if (hostLuck < 10) {
       this.world.resources = Math.floor(this.world.resources / 2);

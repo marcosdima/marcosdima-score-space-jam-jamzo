@@ -52,6 +52,14 @@ class Host {
   hasTrait(trait: Trait) {
     return this.soul.traits.has(trait);
   }
+
+  getStat(stat: Stat) {
+    return this.stats.values[stat] || 0;
+  }
+
+  sumStats(stats: Stat[]) {
+    return stats.reduce((sum, stat) => sum + this.getStat(stat), 0);
+  }
 }
 
 export default Host;
